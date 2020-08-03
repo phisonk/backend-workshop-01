@@ -29,4 +29,16 @@ public class CircularBufferTest {
         assertEquals("A",cb.readData());
         assertEquals("B",cb.readData());
     }
+
+
+    @Test
+    public void write_H_to_full_buffer_should_replace_H_with_the_oldest_element(){
+        CircularBuffer cb = new CircularBuffer();
+        for(int i=0 ; i<9; i++){
+            cb.writeData("A"+i);
+            cb.readData();
+        }
+        cb.writeData("H");
+        assertEquals("H",cb.readData());
+    }
 }
