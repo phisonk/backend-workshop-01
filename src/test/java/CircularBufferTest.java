@@ -41,4 +41,16 @@ public class CircularBufferTest {
         cb.writeData("H");
         assertEquals("H",cb.readData());
     }
+
+    @Test
+    public void setSize_to_20_buffer_size_should_20(){
+        CircularBuffer cb = new CircularBuffer();
+        int bufferSize = 20;
+        cb.setSize(bufferSize);
+        for(int i=0; i<20; i++){
+            cb.writeData("A" + i);
+        }
+        boolean result = cb.isFull();
+        assertTrue("Buffer is not full", result);
+    }
 }

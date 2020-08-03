@@ -26,4 +26,15 @@ public class CircularBuffer {
     public String readData() {
         return this.buffer[readPointer++];
     }
+
+    public void setSize(int size) {
+        String[] newBuffer = new String[size];
+        if(this.buffer.length-bufferSize != 0){
+            for(int i = 0; i<this.buffer.length-bufferSize-1; i++){
+                newBuffer[i] = this.buffer[i];
+            }
+        }
+        bufferSize = size-(this.buffer.length-bufferSize);
+        this.buffer = newBuffer.clone();
+    }
 }
