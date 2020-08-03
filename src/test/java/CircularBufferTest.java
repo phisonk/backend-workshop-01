@@ -34,7 +34,7 @@ public class CircularBufferTest {
     @Test
     public void write_H_to_full_buffer_should_replace_H_with_the_oldest_element(){
         CircularBuffer cb = new CircularBuffer();
-        for(int i=0 ; i<9; i++){
+        for(int i=0 ; i<10; i++){
             cb.writeData("A"+i);
             cb.readData();
         }
@@ -52,5 +52,18 @@ public class CircularBufferTest {
         }
         boolean result = cb.isFull();
         assertTrue("Buffer is not full", result);
+    }
+
+    @Test
+    public void change_size_of_full_buffer_10_to_15_should_not_loss_any_element(){
+        CircularBuffer cb = new CircularBuffer();
+        for(int i=0; i<10; i++){
+            cb.writeData("A" + i);
+        }
+        cb.setSize(15);
+        assertEquals("A9", cb.readData());
+        for(int i=1; i<9; i++){
+            assertEquals("A"+i, cb.readData());
+        }
     }
 }

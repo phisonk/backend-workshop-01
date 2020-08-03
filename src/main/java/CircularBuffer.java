@@ -15,6 +15,13 @@ public class CircularBuffer {
     }
 
     public void writeData(String input) {
+        if(writePointer == this.buffer.length-1) {
+            writePointer = 0;
+        }
+        if(this.isFull()){
+            bufferSize = 10;
+
+        }
         bufferSize--;
         this.buffer[writePointer++] = input;
     }
@@ -24,13 +31,16 @@ public class CircularBuffer {
     }
 
     public String readData() {
+        if(readPointer == this.buffer.length-1) {
+            readPointer = 0;
+        }
         return this.buffer[readPointer++];
     }
 
     public void setSize(int size) {
         String[] newBuffer = new String[size];
         if(this.buffer.length-bufferSize != 0){
-            for(int i = 0; i<this.buffer.length-bufferSize-1; i++){
+            for(int i = 0; i<this.buffer.length; i++){
                 newBuffer[i] = this.buffer[i];
             }
         }
