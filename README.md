@@ -26,4 +26,4 @@
 3. write_A_B_to_buffer_should_read_A_B_from_buffer
 4. write_H_to_full_buffer_should_replace_H_with_the_oldest_element
 5. setSize_to_20_buffer_size_should_20
-6. change_size_of_full_buffer_to_15_should_not_loss_any_element
+6. change_size_of_full_buffer_10_to_15_should_not_loss_any_element
