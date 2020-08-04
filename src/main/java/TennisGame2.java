@@ -20,17 +20,27 @@ public class TennisGame2 {
         scoreMap.put(1,"Fifteen");
         scoreMap.put(2,"Thirty");
         scoreMap.put(3,"Forty");
-        boolean equalscorebutnotdeuce = player1Point == player2Point && player1Point < 3;
+        //Deuce
+        if (player1Point == player2Point && player1Point >=3) {
+            return "Deuce";
+        }
 
+        boolean equalScoreButNotDeuce = player1Point == player2Point;
         //Equal score
-        if (equalscorebutnotdeuce)
+        if (equalScoreButNotDeuce)
         {
             return scoreMap.get(player1Point)+"-All";
         }
 
-        //Deuce
-        if (player1Point == player2Point && player1Point >=3) {
-            return "Deuce";
+        //Advantage
+        if (player1Point > player2Point && player2Point >= 3 && (player1Point - player2Point)==1)
+        {
+            return "Advantage " + player1Name;
+        }
+
+        if (player2Point > player1Point && player1Point >= 3 && (player2Point - player1Point)==1)
+        {
+            return "Advantage " + player2Name;
         }
 
         //Winner
@@ -42,18 +52,6 @@ public class TennisGame2 {
         {
             return "Win for " + player2Name;
         }
-
-        //Advantage
-        if (player1Point > player2Point && player2Point >= 3)
-        {
-            return "Advantage " + player1Name;
-        }
-
-        if (player2Point > player1Point && player1Point >= 3)
-        {
-            return "Advantage " + player2Name;
-        }
-
 
         return scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
     }
