@@ -15,43 +15,47 @@ public class TennisGame2 {
 
 
     public String getScore(){
-        String score = "";
         Map<Integer,String> scoreMap = new HashMap<>();
         scoreMap.put(0,"Love");
         scoreMap.put(1,"Fifteen");
         scoreMap.put(2,"Thirty");
         scoreMap.put(3,"Forty");
-        if (player1Point == player2Point && player1Point < 3)
-        {
-            score = scoreMap.get(player1Point)+"-All";
-        }
-        if (player1Point == player2Point && player1Point >=3)
-            score = "Deuce";
+        boolean equalscorebutnotdeuce = player1Point == player2Point && player1Point < 3;
 
-        if (player2Point != player1Point && player2Point < 4 && player1Point < 4)
+        //Equal score
+        if (equalscorebutnotdeuce)
         {
-            score = scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
+            return scoreMap.get(player1Point)+"-All";
         }
 
+        //Deuce
+        if (player1Point == player2Point && player1Point >=3) {
+            return "Deuce";
+        }
+
+        //Winner
+        if (player1Point >=4 && player2Point >=0 && (player1Point - player2Point)>=2)
+        {
+            return "Win for " + player1Name;
+        }
+        if (player2Point >=4 && player1Point >=0 && (player2Point - player1Point)>=2)
+        {
+            return "Win for " + player2Name;
+        }
+
+        //Advantage
         if (player1Point > player2Point && player2Point >= 3)
         {
-            score = "Advantage " + player1Name;
+            return "Advantage " + player1Name;
         }
 
         if (player2Point > player1Point && player1Point >= 3)
         {
-            score = "Advantage " + player2Name;
+            return "Advantage " + player2Name;
         }
 
-        if (player1Point >=4 && player2Point >=0 && (player1Point - player2Point)>=2)
-        {
-            score = "Win for " + player1Name;
-        }
-        if (player2Point >=4 && player1Point >=0 && (player2Point - player1Point)>=2)
-        {
-            score = "Win for " + player2Name;
-        }
-        return score;
+
+        return scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
     }
 
     public void p1Score(){
