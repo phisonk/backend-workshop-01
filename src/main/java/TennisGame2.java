@@ -15,8 +15,6 @@ public class TennisGame2 {
 
 
     public String getScore(){
-        String player1Result = "";
-        String player2Result = "";
         String score = "";
         Map<Integer,String> scoreMap = new HashMap<>();
         scoreMap.put(0,"Love");
@@ -30,20 +28,7 @@ public class TennisGame2 {
         if (player1Point == player2Point && player1Point >=3)
             score = "Deuce";
 
-        if (player1Point > 0 && player2Point ==0)
-        {
-            score = scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
-        }
-        if (player2Point > 0 && player1Point ==0)
-        {
-            score = scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
-        }
-
-        if (player1Point > player2Point && player1Point < 4)
-        {
-            score = scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
-        }
-        if (player2Point > player1Point && player2Point < 4)
+        if (player2Point != player1Point && player2Point < 4 && player1Point < 4)
         {
             score = scoreMap.get(player1Point) + "-" + scoreMap.get(player2Point);
         }
