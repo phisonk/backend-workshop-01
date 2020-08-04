@@ -3,10 +3,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CircularBufferTest {
+    CircularBuffer cb = new CircularBuffer();
+
+    @Test
+    public void create_newbuffer(){
+        CircularBuffer cb = new CircularBuffer(10);
+    }
 
     @Test
     public void create_new_buffer_should_empty(){
-        CircularBuffer cb = new CircularBuffer();
         boolean result = cb.isEmpty();
         assertTrue("Buffer Not Available", result);
     }
@@ -61,8 +66,7 @@ public class CircularBufferTest {
             cb.writeData("A" + i);
         }
         cb.setSize(15);
-        assertEquals("A9", cb.readData());
-        for(int i=1; i<9; i++){
+        for(int i=0; i<9; i++){
             assertEquals("A"+i, cb.readData());
         }
     }

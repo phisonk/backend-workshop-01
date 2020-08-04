@@ -1,37 +1,35 @@
-import java.lang.reflect.Array;
-
 public class CircularBuffer {
-    private int bufferSize = 10;
+    private int bufferSize;
     private String[] buffer;
     private int readPointer;
     private int writePointer;
 
     public CircularBuffer() {
-        this.buffer = new String[10];
+        this(10);
+    }
+
+    public CircularBuffer(int size) {
+        this.bufferSize = size;
+        this.buffer = new String[bufferSize];
     }
 
     public boolean isEmpty() {
-        return bufferSize == 10;
+        return readPointer == writePointer;
     }
 
     public void writeData(String input) {
-        if(writePointer == this.buffer.length-1) {
+        if(writePointer == bufferSize){
             writePointer = 0;
         }
-        if(this.isFull()){
-            bufferSize = 10;
-
-        }
-        bufferSize--;
         this.buffer[writePointer++] = input;
     }
 
     public boolean isFull() {
-        return bufferSize == 0;
+        return writePointer >= bufferSize;
     }
 
     public String readData() {
-        if(readPointer == this.buffer.length-1) {
+        if(readPointer == bufferSize){
             readPointer = 0;
         }
         return this.buffer[readPointer++];
@@ -39,12 +37,8 @@ public class CircularBuffer {
 
     public void setSize(int size) {
         String[] newBuffer = new String[size];
-        if(this.buffer.length-bufferSize != 0){
-            for(int i = 0; i<this.buffer.length; i++){
-                newBuffer[i] = this.buffer[i];
-            }
-        }
-        bufferSize = size-(this.buffer.length-bufferSize);
+        System.arraycopy(this.buffer, 0, newBuffer, 0, bufferSize);
+        bufferSize = size;
         this.buffer = newBuffer.clone();
     }
 }
